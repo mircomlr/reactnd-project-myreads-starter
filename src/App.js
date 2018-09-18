@@ -34,10 +34,11 @@ switchShelf = (book, shelf) => {
 // console.log(this.state.books);    
     return (
       <div className="app">
-        <MainPage 
+        {/*<MainPage 
           books={this.state.books}
           switchShelf={this.switchShelf} 
-        />
+        />*/}
+        <SearchPage />
       </div>
     )
   }
