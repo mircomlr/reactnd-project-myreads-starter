@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SearchPage extends Component {
+export default class SearchPage extends Component {
     render() {
         return (
             <div className="search-books">
@@ -26,4 +26,3 @@ class SearchPage extends Component {
     }
 }
   
-export default SearchPage;
