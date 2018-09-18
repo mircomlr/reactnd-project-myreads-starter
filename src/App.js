@@ -20,11 +20,24 @@ export default class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
   }
+
+switchShelf = (book, shelf) => {
+  BooksAPI.update(book, shelf);
+
+  BooksAPI.getAll().then((books) => {
+    this.setState({ books })
+  })
+
+}
+
   render() {
 // console.log(this.state.books);    
     return (
       <div className="app">
-        <MainPage books={this.state.books} />
+        <MainPage 
+          books={this.state.books}
+          switchShelf={this.switchShelf} 
+        />
       </div>
     )
   }

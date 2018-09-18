@@ -13,7 +13,12 @@ export default class Book extends Component {
                                 backgroundImage: `url("${book.imageLinks.thumbnail}")`
                             }}></div>
                     <div className="book-shelf-changer">
-                    <select>
+                    <select
+                        onChange={(event) => this.props.switchShelf(
+                            book, event.target.value
+                        )}
+                        value={this.props.currentShelf}
+                    >
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

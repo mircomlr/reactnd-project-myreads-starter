@@ -17,11 +17,14 @@ export default class MainPage extends Component {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {this.props.books
-                      .filter(book => book.shelf === 'currentlyReading')                       
+                      .filter(book => book.shelf === "currentlyReading")                       
                       .map( book => (
                         <li key={book.id} >
                           <Book 
                             book={book} 
+                            switchShelf={this.props.switchShelf}
+                            currentShelf="currentlyReading"
+
                           />                          
                         </li>))                                   
                     }                      
@@ -33,11 +36,13 @@ export default class MainPage extends Component {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {this.props.books
-                      .filter(book => book.shelf === 'wantToRead')                       
+                      .filter(book => book.shelf === "wantToRead")                       
                       .map( book => (
                         <li key={book.id} >
                           <Book 
                             book={book} 
+                            switchShelf={this.props.switchShelf}
+                            currentShelf="wantToRead"
                           />
                         </li>))                                   
                     }                      
@@ -49,11 +54,13 @@ export default class MainPage extends Component {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {this.props.books
-                      .filter(book => book.shelf === 'read')                       
+                      .filter(book => book.shelf === "read")                       
                       .map( book => (
                         <li key={book.id} >
                           <Book 
                             book={book} 
+                            switchShelf={this.props.switchShelf}
+                            currentShelf="read"
                           />
                         </li>))                                   
                     }                      
