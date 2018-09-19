@@ -16,18 +16,22 @@ export default class SearchPage extends Component {
 
   updateDisplayedBooks = (query) => {
     if (query) {
-    BooksAPI.search(query).then((displayedBooks) => {
-      if (displayedBooks.error === "empty query") {
-        {/* console.log(displayedBooks); */}
-        this.setState({ displayedBooks: [] });
-      } else {
-        this.setState({ displayedBooks });
-      }  
-    })
-    } else {
-      this.setState({ displayedBooks: [] });
+      BooksAPI.search(query).then((displayedBooks) => {
+        if(!!displayedBooks){
+          if(displayedBooks.length>0){
+            const results = displayedBooks.map((book) => {
+              const existingBook = this.state.displayedBooks.find((b) => b.id === book.id)
+              book.shelf = !!existingBook ? existingBook.shelf : "none"
+              return book
+            });
+            this.setState({ displayedBooks: results })
+          } else {
+             this.setState({ displayedBooks: [] })
+          }
+        }
+      })
     }
-  }    
+  } 
 
   render() {
         return (

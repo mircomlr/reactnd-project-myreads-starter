@@ -14,9 +14,13 @@ export default class BooksApp extends React.Component {
       this.setState({ books })
     })
   }
-
-switchShelf = (book, shelf) => {
-  BooksAPI.update(book, shelf);
+  switchShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf        
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat(book)
+    }))     
+  })
 
   BooksAPI.getAll().then((books) => {
     this.setState({ books })
@@ -34,7 +38,8 @@ render() {
           />
         )} />
         <Route exact path='/SearchPage' render={() => (
-          <SearchPage 
+          <SearchPage
+            books={this.state.books} 
             switchShelf={this.switchShelf}
         />
         )} />
