@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 export default class Book extends Component {
     render () {
         const book = this.props.book
+        let displayedThumbnail = book.imageLinks ?
+        book.imageLinks.thumbnail : "";
         return (
             <div className="book">
                 <div className="book-top">
@@ -10,7 +12,7 @@ export default class Book extends Component {
                     style={{ 
                                 width: 128, 
                                 height: 193, 
-                                backgroundImage: `url("${book.imageLinks.thumbnail}")`
+                                backgroundImage: `url("${displayedThumbnail}")`
                             }}></div>
                     <div className="book-shelf-changer">
                     <select

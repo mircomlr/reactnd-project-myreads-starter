@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
+import Book from './Book';
+import * as BooksAPI from './BooksAPI'
 
 export default class SearchPage extends Component {
   state = {
-    query:''
+    query:'',
+    displayedBooks: []
   }
 
   updateQuery = (query) => {
     this.setState({ query })
+    this.updateDisplayedBooks(query);
   }
-    render() {
+
+  updateDisplayedBooks = (query) => {
+    if (query) {
+    BooksAPI.search(query).then((displayedBooks) => {
+      if (displayedBooks.error === "empty query") {
+        {/* console.log(displayedBooks); */}
+        this.setState({ displayedBooks: [] });
+      } else {
+        this.setState({ displayedBooks });
+      }  
+    })
+    } else {
+      this.setState({ displayedBooks: [] });
+    }
+  }    
+
+  render() {
         return (
             <div className="search-books">
             <div className="search-books-bar">
@@ -32,6 +52,13 @@ export default class SearchPage extends Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
+                {this.state.displayedBooks.map(displayedBook => (
+                  <li key={displayedBook.id}>
+                    <Book
+                      book={displayedBook}
+                    />
+                  </li>
+                ))}
             </div>
           </div> 
         );
