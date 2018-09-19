@@ -57,15 +57,23 @@ export default class SearchPage extends Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
-                {this.state.displayedBooks.map(displayedBook => (
-                  <li key={displayedBook.id}>
-                    <Book
-                      book={displayedBook}
-                      switchShelf={this.props.switchShelf}
-                      currentShelf="none" 
-                    />
-                  </li>
-                ))}
+                {this.state.displayedBooks.map(displayedBook => {
+                  let shelf = "none";
+
+                  this.props.books.map(book => (
+                    book.id === displayedBook.id ? shelf = book.shelf : "none"
+                  ));
+                  return (
+                    <li key={displayedBook.id}>
+                      <Book
+                        book={displayedBook}
+                        switchShelf={this.props.switchShelf}
+                        currentShelf={shelf} 
+                      />
+                    </li>
+                  );
+                  })
+                }
             </div>
           </div> 
         );
