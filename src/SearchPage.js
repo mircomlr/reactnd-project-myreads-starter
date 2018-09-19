@@ -56,6 +56,8 @@ export default class SearchPage extends Component {
                   <li key={displayedBook.id}>
                     <Book
                       book={displayedBook}
+                      switchShelf={this.props.switchShelf}
+                      currentShelf="none" 
                     />
                   </li>
                 ))}
